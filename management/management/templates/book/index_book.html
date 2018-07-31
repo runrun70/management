@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <h1 style="margin-bottom:50px">ファイル一覧</h1>
+
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+
+    <a class="h3" href="{{ url_for('book.create_book') }}">新規追加</a>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>version</th>
+                <th>comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>
+                    <a href="{{book.dir}}">{{ book.file_name }}</a>
+                </td>
+                <td>{{ book.version }}</td>
+                <td>{{ book.comment }}</td>
+                <td>
+
+                </td>
+            </tr>
+            {% else %}
+            <td>no files</td>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
